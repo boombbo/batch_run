@@ -9,7 +9,6 @@ import tempfile
 from pathlib import Path
 import base64
 
-from proxies_pool import main
 
 logger = logging.getLogger("FastApiServiceManager")
 api_address = None
