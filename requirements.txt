@@ -1,0 +1,11 @@
+aiohttp
+argparse
+ddddocr
+fastapi
+nest-asyncio
+pillow
+playwright
+pydantic
+requests
+starlette
+uvicorn
