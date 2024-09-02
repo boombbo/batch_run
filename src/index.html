@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>验证码测试</title>
+</head>
+<body>
+    <div id="challenge-container">
+        <div>
+            <fieldset>
+                <div class="botdetect-label">
+                    <img class="captcha-code" aria-label="captcha image" alt="captcha image" src="data:image/png;base64,{{ captcha_image }}">
+                </div>
+                <div>
+                    <div class="actions">
+                        <label id="captcha-code-label" for="CaptchaCode">输入图片中的代码</label>
+                        <form action="/validate" method="post">
+                            <input name="CaptchaCode" class="botdetect-input" tabindex="0" id="solution" type="text" pattern="[A-Za-z0-9]*" aria-label="输入图片中的代码">
+                            <input type="hidden" name="captcha_text" value="{{ captcha_text }}">
+                            <input type="hidden" name="captcha_id" value="{{ captcha_id }}">
+                            <input type="hidden" name="captcha_instance" value="{{ captcha_instance }}">
+                            <input type="hidden" name="captcha_config" value="{{ captcha_config }}">
+                            <input type="hidden" name="captcha_code" value="{{ captcha_code }}">
+                            <input type="hidden" name="captcha_code_length" value="{{ captcha_code_length }}">
+                            <input type="hidden" name="captcha_code_type" value="{{ captcha_code_type }}">
+                            <input type="hidden" name="captcha_image" value="{{ captcha_image }}">
+                            <input type="hidden" name="captcha_image_html" value="{{ captcha_image_html }}">
+                            <input type="hidden" name="captcha_image_url" value="{{ captcha_image_url }}">
+                            <button class="botdetect-button btn">我不是机器人</button>
+                        </form>
+                        <span></span>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+    </div>
+</body>
+</html>

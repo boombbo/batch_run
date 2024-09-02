@@ -1,0 +1,54 @@
+Metadata-Version: 2.3
+Name: sqlite-anyio
+Version: 0.2.3
+Summary: Asynchronous client for SQLite using AnyIO
+Project-URL: Source, https://github.com/davidbrochart/sqlite-anyio
+Project-URL: Issues, https://github.com/davidbrochart/sqlite-anyio/issues
+Author-email: Alex Grönholm <alex.gronholm@nextday.fi>, David Brochart <david.brochart@gmail.com>
+License: This is the MIT license: http://www.opensource.org/licenses/mit-license.php
+        
+        Copyright (c) Alex Grönholm
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy of this
+        software and associated documentation files (the "Software"), to deal in the Software
+        without restriction, including without limitation the rights to use, copy, modify, merge,
+        publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+        to whom the Software is furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all copies or
+        substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+        INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+        PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+        FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+        OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+        DEALINGS IN THE SOFTWARE.
+License-File: LICENSE
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Database
+Classifier: Typing :: Typed
+Requires-Python: >=3.8
+Requires-Dist: anyio<5.0,>=4.0
+Provides-Extra: test
+Requires-Dist: coverage[toml]<8,>=7; extra == 'test'
+Requires-Dist: mypy; extra == 'test'
+Requires-Dist: pytest<9,>=8; extra == 'test'
+Requires-Dist: trio<0.25,>=0.24.0; extra == 'test'
+Description-Content-Type: text/markdown
+
+[![Build Status](https://github.com/davidbrochart/sqlite-anyio/actions/workflows/test.yml/badge.svg?query=branch%3Amain++)](https://github.com/davidbrochart/sqlite-anyio/actions/workflows/test.yml/badge.svg?query=branch%3Amain++)
+[![Code Coverage](https://img.shields.io/badge/coverage-100%25-green)](https://img.shields.io/badge/coverage-100%25-green)
+
+# sqlite-anyio
+
+Originally from [here](https://gist.github.com/agronholm/458637aa569720fb1305cc74347e3e1d).

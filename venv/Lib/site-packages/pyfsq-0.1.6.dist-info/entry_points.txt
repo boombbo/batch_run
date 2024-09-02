@@ -1,0 +1,3 @@
+[console_scripts]
+pyfsqbench = cli.fsqbench:main
+pyfsqc = cli.fsqc:main

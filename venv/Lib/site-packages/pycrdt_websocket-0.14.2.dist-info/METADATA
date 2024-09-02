@@ -1,0 +1,102 @@
+Metadata-Version: 2.3
+Name: pycrdt-websocket
+Version: 0.14.2
+Summary: WebSocket connector for pycrdt
+Project-URL: Homepage, https://github.com/jupyter-server/pycrdt-websocket
+Project-URL: Source, https://github.com/jupyter-server/pycrdt-websocket
+Project-URL: Issues, https://github.com/jupyter-server/pycrdt-websocket/issues
+Project-URL: Pypi, https://pypi.org/project/pycrdt-websocket
+Author-email: David Brochart <david.brochart@gmail.com>
+License: MIT License
+        
+        Copyright (c) 2022 David Brochart
+        
+        Permission is hereby granted, free of charge, to any person obtaining a copy
+        of this software and associated documentation files (the "Software"), to deal
+        in the Software without restriction, including without limitation the rights
+        to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+        copies of the Software, and to permit persons to whom the Software is
+        furnished to do so, subject to the following conditions:
+        
+        The above copyright notice and this permission notice shall be included in all
+        copies or substantial portions of the Software.
+        
+        THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+        IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+        FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+        AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+        LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+        OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+        SOFTWARE.
+License-File: LICENSE
+Keywords: websocket,yjs
+Classifier: Development Status :: 4 - Beta
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python
+Classifier: Programming Language :: Python :: 3.8
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Requires-Python: >=3.8
+Requires-Dist: anyio<5,>=3.6.2
+Requires-Dist: pycrdt<0.10.0,>=0.9.0
+Requires-Dist: sqlite-anyio<0.3.0,>=0.2.3
+Provides-Extra: django
+Requires-Dist: channels; extra == 'django'
+Provides-Extra: docs
+Requires-Dist: mkdocs; extra == 'docs'
+Requires-Dist: mkdocs-material; extra == 'docs'
+Requires-Dist: mkdocstrings-python; extra == 'docs'
+Provides-Extra: test
+Requires-Dist: httpx-ws>=0.5.2; extra == 'test'
+Requires-Dist: hypercorn>=0.16.0; extra == 'test'
+Requires-Dist: mypy!=1.10.0,!=1.10.1; extra == 'test'
+Requires-Dist: pre-commit; extra == 'test'
+Requires-Dist: pytest; extra == 'test'
+Requires-Dist: pytest-timeout; extra == 'test'
+Requires-Dist: sniffio; extra == 'test'
+Requires-Dist: trio>=0.25.0; extra == 'test'
+Description-Content-Type: text/markdown
+
+# Pycrdt-websocket
+
+Pycrdt-websocket is an async WebSocket connector for pycrdt.
+
+[![Build Status](https://github.com/jupyter-server/pycrdt-websocket/workflows/CI/badge.svg)](https://github.com/jupyter-server/pycrdt-websocket/actions)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
+---
+
+**Documentation**: <a href="https://jupyter-server.github.io/pycrdt-websocket" target="_blank">https://jupyter-server.github.io/pycrdt-websocket</a>
+
+**Source Code**: <a href="https://github.com/jupyter-server/pycrdt-websocket" target="_blank">https://github.com/jupyter-server/pycrdt-websocket</a>
+
+---
+
+Pycrdt-websocket is a Python library for building WebSocket servers and clients that connect and synchronize shared documents.
+It can be used to create collaborative web applications.
+
+The following diagram illustrates a typical architecture. The goal is to share a document among several clients.
+
+Each client has an instance of a `Doc`, representing their view of a document. A shared document also lives in a [room](./reference/Room.md) on the server side. Conceptually, a room can be seen as the place where clients collaborate on a document. The WebSocket to which a client connects points to the corresponding room through the endpoint path. In the example below, clients A and B connect to a WebSocket at path `room-1`, and thus both clients find themselves in a room called `room-1`. All the `Doc` synchronization logic is taken care of by the [WebsocketProvider](./reference/WebSocket_provider.md).
+
+Each update to a shared document can be persisted to disk using a [store](./reference/Store.md), which can be a file or a database.
+```mermaid
+flowchart TD
+    classDef room1 fill:#f96
+    classDef room2 fill:#bbf
+    A[Client A<br>room-1]:::room1 <-->|WebSocket<br>Provider| server(WebSocket Server)
+    B[Client B<br>room-1]:::room1 <-->|WebSocket<br>Provider| server
+    C[Client C<br>room-2]:::room2 <-->|WebSocket<br>Provider| server
+    D[Client D<br>room-2]:::room2 <-->|WebSocket<br>Provider| server
+    server <--> room1((room-1<br>clients: A, B)):::room1
+    server <--> room2((room-2<br>clients: C, D)):::room2
+    A <-..-> room1
+    B <-..-> room1
+    C <-..-> room2
+    D <-..-> room2
+    room1 ---> store1[(Store)]
+    room2 ---> store2[(Store)]
+```
